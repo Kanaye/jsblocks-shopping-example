@@ -1,0 +1,10 @@
+{
+		"globals": {
+			"browser": true,
+			"it": true,
+			"describe": true,
+			"expect": true,
+			"beforeEach": true,
+			"beforeAll": true
+		}
+}
