@@ -2,10 +2,7 @@
   "private": true,
   "name": "behaviour tests for the shopping example",
   "dependencies": {
-    "wdio-spec-reporter": "0.0.3",
-    "webdriverio": "^4.3.0"
-  },
-  "devDependencies": {
+    "webdriverio": "^4.3.0",
     "wdio-jasmine-framework": "^0.2.13",
     "wdio-selenium-standalone-service": "0.0.7",
     "wdio-spec-reporter": "0.0.3"
