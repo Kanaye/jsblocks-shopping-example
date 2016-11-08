@@ -21,5 +21,4 @@ describe('pagination', function () {
 		expect(browser.element('.pagination li:nth-child(2) a').getAttribute('class')).not.toBe('active');
 		expect(browser.element('.pagination li:nth-child(3) a').getAttribute('class')).toBe('active');
 	});
-
 });
