@@ -3,6 +3,7 @@ describe('pagination', function () {
 		browser.url('/');
 		browser.waitForExist('.pagination-area');
 	});
+
 	it('renders 8 childs + the header and fotter item', function () {
 		expect(browser.elements('.pagination li').value.length).toBe(10);
 	});

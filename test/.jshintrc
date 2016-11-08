@@ -6,5 +6,6 @@
 			"expect": true,
 			"beforeEach": true,
 			"beforeAll": true
-		}
+		},
+		"node": true
 }

@@ -3,7 +3,7 @@ describe('items', function () {
 		browser.url('/');
 		browser.waitForExist('[data-query="each(products.view)"] div');
 	});
-	
+
 	it('shows the first 9 items on load', function () {
 		expect(browser.elements('[data-query="each(products.view)"] > div').value.length).toBe(9);
 	});
@@ -18,8 +18,40 @@ describe('items', function () {
 			expect(browser.element(selector + ' img').getAttribute('src')).toMatch(/\/images\/products\/1-small\.jpg$/);
 		});
 
+		it('has the correct price $14', function () {
+			expect(browser.element(selector + ' h2').getText()).toBe('$14');
+		});
 
+		it('has the correct description', function () {
+			expect(browser.element(selector + ' p').getText()).toBe('Pants with a ribbon - Gray/Blue');
+		});
 
+		it('has a Add to Cart button', function () {
+			expect(browser.element(selector + ' a.btn').getText()).toBe('Add to cart');
+		});
 	});
 
+ 	it('applies a categorie when clicked', function () {
+		browser.element('#accordian .panel:nth-child(3) a').click();
+		expect(browser.element('[data-query="each(products.view)"] div:first-child p').getText()).toBe('Official dress - Beige/Blue');
+		browser.click('#accordian .panel:first-child a');
+	});
+
+	it('applies brands when clicked', function () {
+		browser.element('[data-query="each(brands)"] .panel:nth-child(3) a').click();
+		expect(browser.element('[data-query="each(products.view)"] div:first-child p').getText()).toBe('Casual dress - White/Cyclamen');
+	});
+
+	it('applies 2 filters correctly', function () {
+		browser.element('[data-query="each(categories)"] .panel:last-child a').click();
+		browser.element('[data-query="each(brands)"] .panel:last-child a').click();
+		expect(browser.elements('[data-query="each(products.view) div"]').value.length).toBe(0);
+	});
+
+	it('applies the pagination correcty', function () {
+		browser.url('/');
+		browser.waitForExist('[data-query="each(products.view)"] div');
+		browser.element('[data-query="each(pages)"] li:nth-child(4) a').click();
+		expect(browser.element('[data-query="each(products.view)"] div:first-child p').getText()).toBe('Modern official dress');
+	});
 });

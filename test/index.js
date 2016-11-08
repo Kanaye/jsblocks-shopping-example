@@ -4,17 +4,18 @@ var fs = require('fs');
 var path = require('path');
 var webdriverio = require('webdriverio');
 var appPath = path.join(__dirname, '../app/');
+var wdioConfig = path.join(__dirname, 'wdio.conf.js');
 
-
-var wdio = new webdriverio.Launcher(path.join(__dirname, 'wdio.conf.js'));
-
-console.log('Running client only tests');
-runClientOnlyTests().then(function () {
+var hasError = false;
+console.log('Running tests client-side-rendering only');
+runClientOnlyTests().then(function (exitCode) {
+	hasError = exitCode !== 0 ? true : hasError;
 	console.log('Client tests complete. Running tests with server-side rendering.');
 	return runServerRenderingTests();
-}).then(function () {
+}).then(function (exitCode) {
+	hasError = exitCode !== 0 ? true : hasError;
 	console.log('server side rendering complete.');
-	process.exit(0);
+	process.exit(hasError ? 1 : 0);
 }).catch(function (e) {
 	console.error(e);
 	process.exit(1);
@@ -24,9 +25,9 @@ function runClientOnlyTests() {
 	return new Promise(function (resolve, reject) {
 		var app = express();
 		app.use(express.static(appPath));
-		var content = fs.readFileSync(path.join(appPath, 'index.html'));
+		var content = fs.readFileSync(path.join(appPath, 'index.html'), {encoding: 'utf-8'});
 		app.get('/*', function (req, res) {
-			res.send(content);	
+			res.type('html').end(content);
 		});
 		app.on('error', reject);
 		var server = app.listen(8080, function () {
@@ -57,7 +58,7 @@ function runServerRenderingTests() {
 }
 
 function runTests() {
-	return wdio.run();
+	return new webdriverio.Launcher(wdioConfig).run();
 }
 
 
