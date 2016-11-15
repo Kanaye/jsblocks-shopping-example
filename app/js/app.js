@@ -142,7 +142,7 @@
 
 		routed: function (params) {
 			this.image = params.image;
-			if (this.products.length == 0) {
+			if (this.products().length == 0) {
 				this.products.on('add', this.populate);
 			} else {
 				this.populate();
