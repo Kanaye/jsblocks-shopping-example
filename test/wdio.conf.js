@@ -42,7 +42,7 @@ exports.config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instance available you can make sure that not more than
         // 5 instance gets started at a time.
-        maxInstances: 1,
+        maxInstances: 5,
         //
         browserName: 'chrome'
     }],
@@ -147,8 +147,10 @@ exports.config = {
     //
     // Gets executed before test execution begins. At this point you can access all global
     // variables, such as `browser`. It is the perfect place to define custom commands.
-    // before: function (capabilities, specs) {
-    // },
+     before: function (capabilities, specs) {
+        // quick (while dirty) way to set up a helper to not require is over and over again
+        global.viewReady = require('./viewReady.js');
+     },
     //
     // Hook that gets executed before the suite starts
     // beforeSuite: function (suite) {

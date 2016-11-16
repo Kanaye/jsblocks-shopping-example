@@ -3,12 +3,12 @@
   "name": "jsblocks-shopping-example-tests",
   "describption": "Tests for the jsblocks shopping example",
   "dependencies": {
-    "webdriverio": "^4.3.0",
-    "wdio-jasmine-framework": "^0.2.13",
+    "wdio-jasmine-framework": "^0.2.15",
     "wdio-selenium-standalone-service": "0.0.7",
-    "wdio-spec-reporter": "0.0.3"
+    "wdio-spec-reporter": "0.0.3",
+    "webdriverio": "^4.3.0"
   },
   "scripts": {
-	"test": "node index.js"
+    "test": "node index.js"
   }
 }
