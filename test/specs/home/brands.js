@@ -1,6 +1,7 @@
 describe('brands', function () {
 	beforeAll(function () {
 		browser.url('/');
+		browser.waitForReadyView('Home');
 		browser.waitForExist('[data-query="view(Home)"] [data-query="each(brands)"]');
 	});
 

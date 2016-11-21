@@ -5,8 +5,7 @@
 			"describe": true,
 			"expect": true,
 			"beforeEach": true,
-			"beforeAll": true,
-			"viewReady": true
+			"beforeAll": true
 		},
 		"node": true
 }

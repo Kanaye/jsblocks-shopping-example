@@ -39,11 +39,7 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [{
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instance available you can make sure that not more than
-        // 5 instance gets started at a time.
-        maxInstances: 5,
-        //
+        maxInstances: 10,
         browserName: 'chrome'
     }],
     //
@@ -68,7 +64,7 @@ exports.config = {
     //
     // Set a base URL in order to shorten url command calls. If your url parameter starts
     // with "/", then the base url gets prepended.
-    baseUrl: 'http://localhost:8080',
+    baseUrl: 'http://localhost:8000',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -148,8 +144,8 @@ exports.config = {
     // Gets executed before test execution begins. At this point you can access all global
     // variables, such as `browser`. It is the perfect place to define custom commands.
      before: function (capabilities, specs) {
-        // quick (while dirty) way to set up a helper to not require is over and over again
-        global.viewReady = require('./viewReady.js');
+        browser.addCommand('waitForReadyView', require('./viewReady.js'));
+
      },
     //
     // Hook that gets executed before the suite starts

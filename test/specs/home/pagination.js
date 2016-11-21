@@ -2,6 +2,7 @@ describe('pagination', function () {
 	beforeAll(function () {
 		browser.url('/');
 		browser.waitForExist('.pagination-area');
+		browser.pause(50);
 	});
 
 	it('renders 8 childs + the header and fotter item', function () {

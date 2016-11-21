@@ -1,7 +1,9 @@
 describe('items', function () {
 	beforeAll(function () {
 		browser.url('/');
-		browser.waitForExist('[data-query="each(products.view)"] div');
+		browser.waitForReadyView('Home');
+		browser.waitForExist('[data-query="each(products.view)"] > div');
+		browser.pause(50);
 	});
 
 	it('shows the first 9 items on load', function () {
@@ -33,18 +35,20 @@ describe('items', function () {
 
  	it('applies a categorie when clicked', function () {
 		browser.element('#accordian .panel:nth-child(3) a').click();
+		browser.pause(50);
 		expect(browser.element('[data-query="each(products.view)"] div:first-child p').getText()).toBe('Official dress - Beige/Blue');
-		browser.click('#accordian .panel:first-child a');
 	});
 
 	it('applies brands when clicked', function () {
 		browser.element('[data-query="each(brands)"] .panel:nth-child(3) a').click();
+		browser.pause(50);
 		expect(browser.element('[data-query="each(products.view)"] div:first-child p').getText()).toBe('Casual dress - White/Cyclamen');
 	});
 
 	it('applies 2 filters correctly', function () {
 		browser.element('[data-query="each(categories)"] .panel:last-child a').click();
 		browser.element('[data-query="each(brands)"] .panel:last-child a').click();
+		browser.pause(50);
 		expect(browser.elements('[data-query="each(products.view) div"]').value.length).toBe(0);
 	});
 
@@ -52,6 +56,7 @@ describe('items', function () {
 		browser.url('/');
 		browser.waitForExist('[data-query="each(products.view)"] div');
 		browser.element('[data-query="each(pages)"] li:nth-child(4) a').click();
+		browser.pause(50);
 		expect(browser.element('[data-query="each(products.view)"] div:first-child p').getText()).toBe('Modern official dress');
 	});
 });
