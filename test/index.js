@@ -16,12 +16,14 @@ startStaticServer()
 	}).then(stopStaticServer)
 	.then(startRenderedServer)
 	.then(runTests)
-	.then(stopRenderedServer)
 	.then(function (exitCode) {
 		hasError = exitCode !== 0 ? true : hasError;
-		console.log('server side rendering complete.');
+		console.log('server side rendering  tests complete.');
+	}).then(stopRenderedServer)
+	.then(function () {
 		process.exit(hasError ? 1 : 0);
-	}).catch(function (e) {
+	})
+	.catch(function (e) {
 		console.error(e);
 		process.exit(1);
 	});
